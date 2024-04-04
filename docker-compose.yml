@@ -10,6 +10,7 @@ services:
     environment:
       - SCALITY_ACCESS_KEY_ID=travel
       - SCALITY_SECRET_ACCESS_KEY=travel
+      - SCALITY_CORS_ALLOW_ORIGIN=*
   s3server-test:
     image: scality/s3server:latest
     container_name: s3server-test
@@ -19,3 +20,4 @@ services:
     environment:
       - SCALITY_ACCESS_KEY_ID=travel
       - SCALITY_SECRET_ACCESS_KEY=travel
+      - SCALITY_CORS_ALLOW_ORIGIN=*
