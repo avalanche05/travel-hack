@@ -6,10 +6,9 @@ API_KEY = ""
 
 class ChatBot:
     def __init__(self,
-                 api_key: str,
                  model: str = "gpt-3.5-turbo") -> None:
         self.client = OpenAI(
-            api_key=api_key
+            api_key=API_KEY
         )
         self.model = model
         self.base_prompt = ""
@@ -26,3 +25,11 @@ class ChatBot:
         )
 
         return chat_completion.choices[0].message.content
+
+
+class Recommender:
+    def __init__(self) -> None:
+        pass
+
+    def predict(self,) -> str:
+        pass
