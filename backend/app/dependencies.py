@@ -15,11 +15,11 @@ def get_db():
 
 def current_user(
         db: Session = Depends(get_db),
-        access_token: str | None = Depends(oauth2_scheme)) -> models.User:
+        access_token: str = Depends(oauth2_scheme)) -> models.User:
     if not access_token:
         raise HTTPException(
             status_code=401,
             detail="Not authenticated",
         )
 
-    return crud.read_user_by_token(db, access_token.credentials)
+    return crud.get_user(int(access_token.credentials), db)
