@@ -75,8 +75,8 @@ class CategoryClassifier:
         similarity = (100.0 * logits_per_category).softmax(dim=-1)
         indexes = similarity.argmax(dim=-1).numpy()
         
-        v, i = similarity.topk(5)
-        print(i)
+        # v, i = similarity.topk(5)
+        # print(i)
 
         if len(indexes) == 1:
             return self.categories[indexes[0]]
