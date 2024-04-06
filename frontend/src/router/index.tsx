@@ -5,6 +5,7 @@ import SignUp from '../pages/SignUp';
 import Login from '../pages/Login';
 import PlacesDetails from '../pages/PlacesDetails';
 import PlacesList from '../pages/PlacesList';
+import Order from '../pages/Order';
 
 export const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
     {
         path: '/places-details/:placeId',
         element: <PlacesDetails />,
+    },
+    {
+        path: '/orders/:eventId',
+        element: <Order />,
     },
     {
         path: '/places-list',
