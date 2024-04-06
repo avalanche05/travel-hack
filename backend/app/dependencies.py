@@ -22,4 +22,4 @@ def current_user(
             detail="Not authenticated",
         )
 
-    return crud.read_user_by_token(db, access_token.credentials)
+    return crud.get_user(int(access_token.credentials), db)

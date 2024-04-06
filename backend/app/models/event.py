@@ -11,4 +11,6 @@ class Event(BaseSqlModel):
     description = Column(String)
     price = Column(Float, nullable=True)
     has_insurance = Column(Boolean, nullable=False)
-    date = Column(DateTime)
+    image = Column(String, nullable=True)
+
+    event_purchases = relationship("EventPurchase", back_populates="event")

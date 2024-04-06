@@ -15,6 +15,8 @@ class User(BaseSqlModel):
     age: Mapped[int] = mapped_column(Integer, nullable=True)
     gender: Mapped[str] = mapped_column(String, nullable=True)
 
+    event_purchases = relationship("EventPurchase", back_populates="user")
+
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
 

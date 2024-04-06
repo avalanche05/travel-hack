@@ -20,9 +20,9 @@ def event_purchase_list(db: Session = Depends(get_db)) -> list[schemas.EventPurc
 
 
 @event_purchase_router.get(path="/{event_purchase_id}")
-def get_event_purchase_by_event_id(event_purchase_id: int,
-                                   db: Session = Depends(get_db)
-                                   ) -> schemas.EventPurchase:
+def get_event_purchase_by_id(event_purchase_id: int,
+                             db: Session = Depends(get_db)
+                             ) -> schemas.EventPurchase:
     db_event_purchase = crud.get_event_purchase_by_id(db, event_purchase_id)
 
     return serializers.get_event_purchase(db_event_purchase)
@@ -30,8 +30,9 @@ def get_event_purchase_by_event_id(event_purchase_id: int,
 
 @event_purchase_router.post(path="/")
 def create_event_purchase(event_purchase_create: schemas.EventPurchaseCreate,
-                          db: Session = Depends(get_db)) -> schemas.EventPurchase:
-    db_event_purchase = crud.create_event_purchase(db, event_purchase_create)
+                          db: Session = Depends(get_db),
+                          user: models.User = Depends(current_user)) -> schemas.EventPurchase:
+    db_event_purchase = crud.create_event_purchase(db, event_purchase_create, user.id)
 
     return serializers.get_event_purchase(db_event_purchase)
 
