@@ -134,6 +134,6 @@ if __name__ == "__main__":
     # print(model.classify_text([
     #     long_text, short_text, normal_text
     # ]))
-    print(model.classify_text_top5([
+    print(model.classify_text_topk([
         long_text, short_text, normal_text
     ]))
