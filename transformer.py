@@ -7,7 +7,7 @@ from categories import (
     )
 
 
-API_KEY = ""
+API_KEY = "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"
 
 
 class TransformerModel:
