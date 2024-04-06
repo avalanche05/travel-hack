@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
 
 import './index.scss';
+import './index.css';
 import { ConfigProvider } from 'antd';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -11,7 +12,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <ConfigProvider
             theme={{
                 token: {
-                    colorPrimary: '#0277FF',
+                    colorPrimary: '#FFCF08',
+                    borderRadius: 12,
                 },
             }}
         >
