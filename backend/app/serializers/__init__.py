@@ -1,1 +1,1 @@
-from story import *
+from . import *

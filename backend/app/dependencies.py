@@ -15,7 +15,7 @@ def get_db():
 
 def current_user(
         db: Session = Depends(get_db),
-        access_token: str | None = Depends(oauth2_scheme)) -> models.User:
+        access_token: str = Depends(oauth2_scheme)) -> models.User:
     if not access_token:
         raise HTTPException(
             status_code=401,

@@ -1,7 +1,18 @@
 from pydantic import BaseModel
 
 
+class Option(BaseModel):
+    id: int
+    label: str
+
+
+class Step(BaseModel):
+    id: int
+    image: str
+    is_quiz: bool
+    options: list[Option]
+
+
 class Story(BaseModel):
     id: int
-    title: str
-    s3path: str
+    steps: list[Step]
