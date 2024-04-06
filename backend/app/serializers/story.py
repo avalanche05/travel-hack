@@ -3,14 +3,14 @@ from typing import List
 from app import models, schemas
 
 
-def get_option(db_option: schemas.Option):
+def get_option(db_option: models.Option):
     return schemas.Option(
         id=db_option.id,
         label=db_option.label,
     )
 
 
-def get_options(db_options: list[schemas.Option]):
+def get_options(db_options: list[models.Option]):
     return [get_option(db_option) for db_option in db_options]
 
 
