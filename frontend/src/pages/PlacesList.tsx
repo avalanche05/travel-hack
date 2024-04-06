@@ -14,12 +14,12 @@ const PlacesList = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const events = await EventsApiServiceInstanse.getEvents();
-            setEvents(events);
+            const fetchedEvents = await EventsApiServiceInstanse.getEvents();
+            setEvents(fetchedEvents);
         };
 
         fetchEvents();
-    }, [events]);
+    }, []);
 
     return (
         <>
