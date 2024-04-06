@@ -2,12 +2,12 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 
-from app import schemas
+from .event import Event
 
 
 class EventPurchase(BaseModel):
     user_id: int
-    event: schemas.Event
+    event: Event
     insurance_price: Optional[float] = None
     date: datetime
     is_visited: Optional[bool] = True
