@@ -7,7 +7,8 @@ from ml.app.utils.categories import (
     BASE_EVENT_PROMPT,
     OUTPUT_PROMPT,
     EVENT_CATEGORY_PROMPT,
-    event_failure_pair
+    event_failure_pair,
+    EVENT_DESC_PROMPT
     )
 
 
@@ -82,6 +83,22 @@ class TransformerModel:
         )
 
         return chat_completion.choices[0].message.content
+    
+    def predict_description_from_description(self,
+                                             event_description: str) -> str:
+        chat_completion = self.client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": EVENT_DESC_PROMPT
+                               + "\n"
+                               + event_description
+                }
+            ],
+            model=self.model
+        )
+
+        return chat_completion.choices[0].message.content
 
 
 if __name__ == "__main__":
@@ -93,7 +110,9 @@ if __name__ == "__main__":
     # print()
     # print(model.predict_description_to_buy("30 лет мужчина, два малолетних ребенка, отличные показатели здоровья",
     #                                        "прогулка на свежем воздухе вдали от города по усадьбе"))
+    # print()
+    # print(model.predict_description_to_buy2("Концерт"))
+    # print()
+    # print(model.predict_description_to_buy2("Экскурсия"))
     print()
-    print(model.predict_description_to_buy2("Концерт"))
-    print()
-    print(model.predict_description_to_buy2("Экскурсия"))
+    print(model.predict_description_from_description("Макет многоразового орбитального ракетоплана, внутри которого находится интерактивный музей. Обязательно попробуйте порулить «Бураном» в интерактивном аттракционе и отобедайте борщом в тюбиках. Экспозиция музея расскажет о тонкостях ракетостроения и позволит попробовать свои силы в качестве летчика-испытателя на симуляторе приземления «Бурана» на космодром Байконур.Посещение возможно только в составе группы.Расписание: со вторника по воскресенье в 18:40, 19:00 и 20:00."))
