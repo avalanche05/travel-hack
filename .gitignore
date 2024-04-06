@@ -1,4 +1,7 @@
 venv
 **/.idea
 **/__pycache__
+backend/app/main.py
+backend/app/config.py
 backend/app/.env
+frontend/changer.py
