@@ -12,6 +12,8 @@ class User(BaseSqlModel):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     email: Mapped[str] = mapped_column(String, unique=True, nullable=False)
+    age: Mapped[int] = mapped_column(Integer, nullable=True)
+    gender: Mapped[str] = mapped_column(String, nullable=True)
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
