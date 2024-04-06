@@ -1,5 +1,5 @@
 from openai import OpenAI
-from categories import (
+from ml.app.utils.categories import (
     BASE_USER_PROMPT,
     BASE_CHAT_PROMPT,
     BASE_EVENT_PROMPT,

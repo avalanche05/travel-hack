@@ -1,12 +1,11 @@
 from typing import Union, List
-import os
 import string
 
 import numpy as np
 import torch
 import clip
 
-from categories import categories_lists, categories
+from ml.app.utils.categories import categories_lists, categories
 
 
 class CategoryClassifier:
