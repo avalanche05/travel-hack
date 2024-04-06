@@ -6,5 +6,5 @@ from app import models, schemas
 
 
 def get_all_stories(db: Session):
-    trades = db.query(models.Story).all()
-    return trades
+    stories = db.query(models.Story).all()
+    return stories
