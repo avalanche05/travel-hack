@@ -1,7 +1,7 @@
 from typing import Optional
 from openai import OpenAI
-# from ml.app.utils.categories import (
-from categories import (
+from ml.app.utils.categories import (
+# from categories import (
     BASE_USER_PROMPT,
     BASE_CHAT_PROMPT,
     BASE_EVENT_PROMPT,
