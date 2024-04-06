@@ -24,14 +24,8 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
-    _app.include_router(routers.user.user_router)
-    _app.include_router(routers.cfa_image.cfa_image_router)
-    _app.include_router(routers.cfa.cfa_router)
-    _app.include_router(routers.offer.offer_router)
-    _app.include_router(routers.desire.desire_router)
-    _app.include_router(routers.deal.deal_router)
-    _app.include_router(routers.statistic.statistic_router)
-    _app.include_router(routers.trade.trade_router)
+    _app.include_router(routers.story.story_router)
+
 
     @_app.get("/info")
     async def download_file():
