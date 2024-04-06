@@ -8,6 +8,7 @@ class Option(BaseModel):
 
 class Step(BaseModel):
     id: int
+    title: str
     image: str
     is_quiz: bool
     options: list[Option]

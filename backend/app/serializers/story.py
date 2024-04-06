@@ -17,6 +17,7 @@ def get_options(db_options: list[models.Option]):
 def get_step(db_step: models.Step):
     return schemas.Step(
         id=db_step.id,
+        title=db_step.title,
         image=db_step.image,
         is_quiz=db_step.is_quiz,
         options=get_options(db_step.options),
