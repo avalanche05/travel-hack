@@ -75,12 +75,49 @@ class CategoryClassifier:
         similarity = (100.0 * logits_per_category).softmax(dim=-1)
         indexes = similarity.argmax(dim=-1).numpy()
         
-        v, i = similarity.topk(5)
-        print(i)
+        # v, i = similarity.topk(5)
+        # print(i)
 
         if len(indexes) == 1:
             return self.categories[indexes[0]]
         
+        return self.categories[indexes].tolist()
+    
+    def classify_text_topk(self,
+                           text: Union[str, List[str]],
+                           k: int = 5) -> List[List[str]]:
+        '''
+            подавайте описание мероприятия (или список описаний нескольких) ->
+            на выход получаете список из 5 категорий на каждое мероприятие
+        '''
+        input_text = text
+        if not isinstance(text, list):
+            input_text = [text]
+        
+        input_text = [self.preprocess_txt(t) for t in input_text]
+        
+        text_tokens = clip.tokenize(input_text, truncate=True).to(self.device)
+
+        with torch.no_grad():
+            text_features = self.model.encode_text(text_tokens)
+            text_features /= text_features.norm(dim=-1, keepdim=True)
+
+            # cosine similarity
+            # logits_per_image = self.logit_scale * self.censor_img_features @ text_features.T
+            # logits_per_category = self.categories_features @ text_features.T
+            
+            # logits_per_category = text_features @ self.categories_features.T
+            logits_per_category = self.logit_scale * text_features @ self.categories_features.T
+        
+        similarity = (100.0 * logits_per_category).softmax(dim=-1)
+        # indexes = similarity.argmax(dim=-1).numpy()
+        
+        vals, indexes = similarity.topk(k)
+        # print(i)
+        indexes = indexes.numpy()
+
+        # if len(indexes) == 1:
+        #     return self.categories[indexes[0]]
         return self.categories[indexes].tolist()
 
 
@@ -94,6 +131,9 @@ if __name__ == "__main__":
 
     normal_text = normal_text.translate(str.maketrans('', '', string.punctuation))
 
-    print(model.classify_text([
+    # print(model.classify_text([
+    #     long_text, short_text, normal_text
+    # ]))
+    print(model.classify_text_topk([
         long_text, short_text, normal_text
     ]))
