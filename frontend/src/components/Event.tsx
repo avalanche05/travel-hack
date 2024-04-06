@@ -138,7 +138,7 @@ const Event = ({ event }: Props) => {
                                 <Button style={{ height: 'auto' }} type='primary'>
                                     <div className='flex flex-col'>
                                         <div className='text-base leading-6 text-stone-900'>
-                                            от 5 400 ₽
+                                            от {event.price} ₽
                                         </div>
                                         <div className='text-xs leading-4 text-stone-900 text-opacity-50'>
                                             Купить билеты
