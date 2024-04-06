@@ -3,8 +3,9 @@ from app import models, schemas
 from datetime import datetime
 
 
-def create_event_purchase(db: Session, event_purchase: schemas.EventPurchaseCreate):
+def create_event_purchase(db: Session, event_purchase: schemas.EventPurchaseCreate, user_id: int):
     db_event_purchase = models.EventPurchase(**event_purchase.dict())
+    db_event_purchase.user_id = user_id
     db.add(db_event_purchase)
     db.commit()
     db.refresh(db_event_purchase)

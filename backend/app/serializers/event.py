@@ -10,7 +10,7 @@ def get_event(db_event: models.Event) -> schemas.Event:
         description=db_event.description,
         price=db_event.price,
         has_insurance=db_event.has_insurance,
-        date=db_event.date,
+        date=db_event.created_at,
         image=db_event.image,
     )
 
