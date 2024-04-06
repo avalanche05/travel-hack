@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Home from '../pages/Home';
 import UnauthorizedOnlyRoute from './UnauthorizedOnlyRoute';
 import AuthService from '../api/AuthService';
 import SignUp from '../pages/SignUp';
 import Login from '../pages/Login';
 import PlacesDetails from '../pages/PlacesDetails';
+import PlacesList from '../pages/PlacesList';
 
 export const router = createBrowserRouter([
     {
@@ -24,15 +24,15 @@ export const router = createBrowserRouter([
         ),
     },
     {
-        path: '/home',
-        element: <Home />,
-    },
-    {
-        path: '/places-details',
+        path: '/places-details/:placeId',
         element: <PlacesDetails />,
     },
     {
+        path: '/places-list',
+        element: <PlacesList />,
+    },
+    {
         path: '*',
-        element: <Home />,
+        element: <PlacesList />,
     },
 ]);
