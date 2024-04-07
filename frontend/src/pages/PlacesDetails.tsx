@@ -128,7 +128,7 @@ const PlacesDetails = () => {
                                                         <Link to={`/orders/${placeData.id}`}>
                                                             <Button type='primary'>
                                                                 <div className='text-base leading-6 text-stone-900'>
-                                                                    Купить блиеты
+                                                                    Купить билеты
                                                                 </div>
                                                             </Button>
                                                         </Link>
@@ -366,7 +366,7 @@ const PlacesDetails = () => {
                                     <Link to={`/orders/${placeData.id}`}>
                                         <Button className='text-stone-900 w-full' type='primary'>
                                             <div className='text-base leading-6 text-stone-900'>
-                                                Купить блиеты
+                                                Купить билеты
                                             </div>
                                         </Button>
                                     </Link>
