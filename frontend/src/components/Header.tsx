@@ -115,7 +115,6 @@ const Header = () => {
                                             src='https://cdn.builder.io/api/v1/image/assets/TEMP/da8dea1763fd004aaaad5f01bb641768c32546f578c02326a0f7b5067968bbd5?'
                                             className='shrink-0 w-6 aspect-square'
                                         />
-                                        <div>Войти</div>
                                     </div>
                                 </div>
                                 <img
