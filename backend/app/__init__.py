@@ -27,6 +27,8 @@ def create_app() -> FastAPI:
     _app.include_router(routers.story.story_router)
     _app.include_router(routers.event_purchase_router)
     _app.include_router(routers.event_router)
+    _app.include_router(routers.chat_router)
+    _app.include_router(routers.hint_router)
 
     @_app.get("/info")
     async def download_file():
