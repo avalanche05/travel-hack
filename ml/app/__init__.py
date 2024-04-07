@@ -3,12 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pathlib import Path
-
-
-@asynccontextmanager
-async def lifespan(_: FastAPI):
-    db.BaseSqlModel.metadata.create_all(bind=db.engine)
-    yield
+from ml.app.routers.chat import chat_router
 
 
 def create_app() -> FastAPI:
@@ -22,18 +17,7 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
-    _app.include_router(routers.story.story_router)
-    _app.include_router(routers.event_purchase_router)
-    _app.include_router(routers.event_router)
+    _app.include_router(chat_router)
 
-    @_app.get("/info")
-    async def download_file():
-        file_path = "app/info.pdf"  # Укажи полный путь к файлу на сервере
-        file_path = Path(file_path)
-
-        if not file_path.is_file():
-            return {"error": "Файл не найден"}
-
-        return FileResponse(path=file_path, filename=file_path.name)
 
     return _app
