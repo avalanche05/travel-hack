@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import PlacesDetails from '../pages/PlacesDetails';
 import PlacesList from '../pages/PlacesList';
 import Order from '../pages/Order';
+import Profile from '../pages/Profile';
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
     {
         path: '/places-list',
         element: <PlacesList />,
+    },
+    {
+        path: '/profile',
+        element: <Profile />,
     },
     {
         path: '*',
