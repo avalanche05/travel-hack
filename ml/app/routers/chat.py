@@ -20,5 +20,5 @@ class ChatOutput(BaseModel):
 @chat_router.post(path="/")
 def post_chat(chat_input: ChatInput) -> ChatOutput:
     model = TransformerModel()
-    result = TransformerModel.predict_chat(chat_input.text)
+    result = model.predict_chat(chat_input.text)
     return ChatOutput(text=result)
