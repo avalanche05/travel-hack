@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pathlib import Path
 from ml.app.routers.chat import chat_router
+from ml.app.routers.hint import hint_router
 
 
 def create_app() -> FastAPI:
@@ -18,6 +19,7 @@ def create_app() -> FastAPI:
     )
 
     _app.include_router(chat_router)
+    _app.include_router(hint_router)
 
 
     return _app
