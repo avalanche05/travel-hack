@@ -19,7 +19,5 @@ class AnalyzeOutput(BaseModel):
 
 
 @story_router.post(path="/")
-def story_list(db: Session = Depends(get_db)) -> List[schemas.Story]:
-    db_stories = crud.get_all_stories(db)
-
-    return serializers.get_stories(db_stories)
+def analyze_result():
+    return []
