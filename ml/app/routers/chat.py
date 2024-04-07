@@ -14,7 +14,7 @@ class ChatInput(BaseModel):
 
 
 class ChatOutput(BaseModel):
-    type: str
+    text: str
 
 
 @chat_router.post(path="/")
