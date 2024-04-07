@@ -1,12 +1,11 @@
+import json
 from sqlalchemy.orm import Session, Mapper
+
 from app import models, schemas
-from fastapi import Depends
-
 from app.dependencies import get_db
-from app.utils.event import event_dict
 
 
-def event_create(event: dict, db: Session = Depends(get_db)):
+def event_create(event: dict, db: Session):
     db_event = models.Event(
         title=event["title"],
         description=event["description"],
@@ -18,12 +17,16 @@ def event_create(event: dict, db: Session = Depends(get_db)):
     db.commit()
 
 
-def events_create(db: Session = Depends(get_db)):
-    for event in event_dict.get("k"):
-        event_create(event, db)
-
-
 if __name__ == "__main__":
-    event_create(event_dict)
+    db = next(get_db())
+    with open("app/utils/presigned_event.json", "r") as f:
+        event_k = json.load(f)
+        for event in event_k.get("result"):
+            print(event)
+            event_create(event, db)
+
+
+
+
 
 
