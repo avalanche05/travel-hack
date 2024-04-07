@@ -6,10 +6,13 @@ import { useEffect, useState } from 'react';
 import { EventsApiServiceInstanse } from '../api/EventsService';
 import { IEvent } from '../api/models';
 import { useMediaQuery } from 'react-responsive';
+import { HintApiServiceInstanse } from '../api/HintService';
 
 const PlacesDetails = () => {
     const { placeId } = useParams();
     const [placeData, setPlaceData] = useState<IEvent | null>(null);
+    const [hint, setHint] = useState<string | null>(null);
+    const [isHintLoading, setIsHintLoading] = useState<boolean>(false);
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1100px)' });
 
     useEffect(() => {
@@ -19,8 +22,18 @@ const PlacesDetails = () => {
                     return;
                 }
 
-                const data = await EventsApiServiceInstanse.getEvent(placeId);
-                setPlaceData(data);
+                setIsHintLoading(true);
+
+                await EventsApiServiceInstanse.getEvent(placeId).then(async (event) => {
+                    setPlaceData(event);
+
+                    const hint = await HintApiServiceInstanse.getHint(event.description);
+
+                    setHint(hint.text);
+                    setIsHintLoading(false);
+
+                    return event;
+                });
             } catch (error) {
                 console.error(error);
             }
@@ -46,8 +59,7 @@ const PlacesDetails = () => {
                                 <div className='text-sky-600 text-ellipsis'>
                                     <Row>
                                         <Typography.Title level={2} className='mb-5'>
-                                            Выставка «Золото сарматских вождей» в ГМИИ им. А.С.
-                                            Пушкина
+                                            {placeData.title}
                                         </Typography.Title>
                                     </Row>
                                 </div>
@@ -184,15 +196,20 @@ const PlacesDetails = () => {
                                                         <div className='flex flex-col justify-center items-start max-md:pr-5 max-md:max-w-full' />
                                                         <div className='flex flex-col max-md:max-w-full'>
                                                             <div className='suggestions mt-2 mb-1'>
-                                                                <div className='text-sm leading-5 text-stone-900 max-md:max-w-full'>
-                                                                    Неожиданно изменились планы на
-                                                                    день мероприятия?
-                                                                </div>
-
-                                                                <div className='text-sm leading-5 text-stone-900 max-md:max-w-full'>
-                                                                    Дедлайны по учёбе не дадют выйти
-                                                                    из дома?
-                                                                </div>
+                                                                {isHintLoading ? (
+                                                                    <div
+                                                                        role='status'
+                                                                        className='w-full animate-pulse'
+                                                                    >
+                                                                        <div className='h-5 bg-slate-200 rounded-xl dark:bg-slate-200 w-full'></div>
+                                                                        <div className='h-5 bg-slate-200 rounded-xl dark:bg-slate-200 w-full mt-1'></div>
+                                                                        <div className='h-5 bg-slate-200 rounded-xl dark:bg-slate-200 w-full mt-1'></div>
+                                                                    </div>
+                                                                ) : (
+                                                                    <div className='text-sm leading-5 text-stone-900 max-md:max-w-full'>
+                                                                        {hint}
+                                                                    </div>
+                                                                )}
                                                             </div>
 
                                                             <div className='flex flex-col justify-center items-start border-b border-solid border-zinc-300 max-md:pr-5 max-md:max-w-full'>
@@ -203,7 +220,9 @@ const PlacesDetails = () => {
                                                             </div>
                                                         </div>
                                                         <div className='flex gap-0 self-start text-sm leading-5 text-sky-600'>
-                                                            <div>Узнать подробнее</div>
+                                                            <a href='https://petrahtimirov.github.io/Insurance-landing/ '>
+                                                                Узнать подробнее
+                                                            </a>
                                                             <img
                                                                 loading='lazy'
                                                                 src='https://cdn.builder.io/api/v1/image/assets/TEMP/545bd933896b2e26822ba7d8ccdf531dfca6af41d13bb3cfc4eb5780caf436e6?apiKey=f021ca4e16f44433b9822e9ffa5d2300&'
