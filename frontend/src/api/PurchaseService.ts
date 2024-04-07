@@ -24,6 +24,16 @@ class PurchaseApiService {
 
         return response.data;
     }
+
+    async getPurchases({ bearer_token }: { bearer_token: string | number }): Promise<IPurchase[]> {
+        const response = await axios.get(`${API_URL}/event_purchase/`, {
+            headers: {
+                Authorization: `Bearer ${bearer_token}`,
+            },
+        });
+
+        return response.data;
+    }
 }
 
 export const PurchaseApiServiceInstanse = new PurchaseApiService();
