@@ -1,7 +1,7 @@
 import { Content } from 'antd/es/layout/layout';
 import Header from '../components/Header';
 import { Button, Col, Row, Typography } from 'antd';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { EventsApiServiceInstanse } from '../api/EventsService';
 import { IEvent } from '../api/models';
@@ -113,11 +113,13 @@ const PlacesDetails = () => {
                                             <div className='flex gap-3 max-md:mt-3'>
                                                 <div className='flex flex-col justify-center'>
                                                     <div className='flex gap-3'>
-                                                        <Button type='primary'>
-                                                            <div className='text-base leading-6 text-stone-900'>
-                                                                Купить блиеты
-                                                            </div>
-                                                        </Button>
+                                                        <Link to={`/orders/${placeData.id}`}>
+                                                            <Button type='primary'>
+                                                                <div className='text-base leading-6 text-stone-900'>
+                                                                    Купить блиеты
+                                                                </div>
+                                                            </Button>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                                 <div className='flex gap-3'>
@@ -342,11 +344,13 @@ const PlacesDetails = () => {
                                     <div className='shrink-0 w-px h-4 bg-white' />
                                 </div>
                                 <div className='flex flex-col justify-center text-base font-medium leading-6 text-center text-stone-900'>
-                                    <Button className='text-stone-900' type='primary'>
-                                        <div className='text-base leading-6 text-stone-900'>
-                                            Купить блиеты
-                                        </div>
-                                    </Button>
+                                    <Link to={`/orders/${placeData.id}`}>
+                                        <Button className='text-stone-900 w-full' type='primary'>
+                                            <div className='text-base leading-6 text-stone-900'>
+                                                Купить блиеты
+                                            </div>
+                                        </Button>
+                                    </Link>
                                 </div>
                                 <div className='flex flex-col justify-center items-start'>
                                     <div className='shrink-0 w-px h-4 bg-white' />
