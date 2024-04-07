@@ -23,6 +23,8 @@ class TransformerModel:
             api_key=API_KEY
         )
         self.model = model
+
+        self.chat_history = ""
     
     def predict_chat(self, message_prompt: str) -> str:
         chat_completion = self.client.chat.completions.create(
@@ -31,6 +33,7 @@ class TransformerModel:
                     "role": "user",
                     "content": BASE_CHAT_PROMPT
                                + "\n"
+                               + self.chat_history
                                + message_prompt
                                + "\n"
                                + SAFETY_PROMPT
@@ -38,6 +41,8 @@ class TransformerModel:
             ],
             model=self.model
         )
+        self.chat_history += message_prompt
+        self.chat_history += "\n"
 
         return chat_completion.choices[0].message.content
     
