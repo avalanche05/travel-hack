@@ -7,7 +7,7 @@ from ml.app.routers.chat import chat_router
 
 
 def create_app() -> FastAPI:
-    _app = FastAPI(lifespan=lifespan)
+    _app = FastAPI()
 
     _app.add_middleware(
         CORSMiddleware,
