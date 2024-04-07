@@ -1,7 +1,8 @@
 venv
 **/.idea
 **/__pycache__
+backend/app/.env
+backend/app/utils/s3_core.py
 backend/app/main.py
 backend/app/config.py
-backend/app/.env
 frontend/changer.py

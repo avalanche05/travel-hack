@@ -7,7 +7,6 @@ class Story(BaseSqlModel):
     __tablename__ = "stories"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    title = Column(String, nullable=False)
     steps = relationship("Step", back_populates="story")
 
 
@@ -15,10 +14,10 @@ class Step(BaseSqlModel):
     __tablename__ = "steps"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String, nullable=False)
     image = Column(String)
     is_quiz = Column(Boolean, nullable=False)
     story_id = Column(Integer, ForeignKey("stories.id"))
-
     story = relationship("Story", back_populates="steps")
     options = relationship("Option", back_populates="step")
 
