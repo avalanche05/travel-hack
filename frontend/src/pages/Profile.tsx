@@ -6,10 +6,36 @@ import { useEffect, useState } from 'react';
 import { StoriesApiServiceInstanse } from '../api/StoriesService';
 import { IStory } from '../api/models/IStory';
 import Story from '../components/Story';
+import { useStores } from '../hooks/useStores';
+import { PurchaseApiServiceInstanse } from '../api/PurchaseService';
+import { IPurchase } from '../api/models';
+import Purchase from '../components/Purchase';
 
 const Profile = () => {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1100px)' });
     const [stories, setStories] = useState<IStory[] | null>(null);
+    const [purchases, setPurchases] = useState<IPurchase[] | null>(null);
+    const { rootStore } = useStores();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await PurchaseApiServiceInstanse.getPurchases({
+                    bearer_token: rootStore.user.id,
+                });
+
+                setPurchases(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+
+        return () => {
+            setStories([]);
+        };
+    }, [rootStore.user.id]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -160,9 +186,13 @@ const Profile = () => {
                                     Предстоящие события
                                 </Typography.Title>
 
-                                <div role='status' className='w-full'>
-                                    <div className='h-[300px] bg-slate-200 rounded-xl dark:bg-slate-200 w-full mb-3'></div>
-                                </div>
+                                <Row gutter={[20, 20]}>
+                                    {purchases?.map((purchase) => (
+                                        <Col span={isTabletOrMobile ? 24 : 12}>
+                                            <Purchase key={purchase.event.id} purchase={purchase} />
+                                        </Col>
+                                    ))}
+                                </Row>
                             </Col>
                         </Row>
 
