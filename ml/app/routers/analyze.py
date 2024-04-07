@@ -1,10 +1,7 @@
 from typing import List
 
 from fastapi import APIRouter, Body, Depends, HTTPException
-from sqlalchemy.orm import Session
 
-from app import schemas, crud, serializers, models
-from app.dependencies import get_db, current_user
 from pydantic import BaseModel
 
 story_router = APIRouter(
